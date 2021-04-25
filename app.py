@@ -46,7 +46,6 @@ def api_attractions():
 		if keyword:
 			cursor.execute(f"SELECT * FROM attractions WHERE name LIKE '%{keyword}%'")
 			Matched_keywords=cursor.fetchall()
-			print(Matched_keywords[0])
 			if(len(Matched_keywords)-(page*12+12))>0:
 				nextPage=page+1
 			else:
@@ -75,7 +74,7 @@ def api_attractions():
 			else:
 				for i in range(page*12,page*12+11+1):
 					page_keyword_data.append(keyword_data[i])
-			print(len(keyword_data))
+			# print(len(keyword_data))
 		else:
 			cursor.execute(f"SELECT * FROM attractions")
 			Matched_keywords=cursor.fetchall()
