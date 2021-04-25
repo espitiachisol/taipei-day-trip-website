@@ -44,32 +44,33 @@ def api_attractions():
 		page_keyword_data=[]
 		page_data=[]
 		if keyword:
-			cursor.execute(f"SELECT * FROM attractions WHERE category LIKE '%{keyword}%'")
-			category=cursor.fetchall()
-			if(len(category)-(page*12+12))>0:
+			cursor.execute(f"SELECT * FROM attractions WHERE name LIKE '%{keyword}%'")
+			Matched_keywords=cursor.fetchall()
+			print(Matched_keywords[0])
+			if(len(Matched_keywords)-(page*12+12))>0:
 				nextPage=page+1
 			else:
 				nextPage=None
 
-			for each_category in category:
-				# print(each_category)
-				images=json.loads(each_category[9])
+			for each_keyword in Matched_keywords:
+				# print(each_keyword)
+				images=json.loads(each_keyword[9])
 				each_data={
-				"id":each_category[0],
-				"name":each_category[1],
-				"category":each_category[2],
-				"description":each_category[3],
-				"address":each_category[4],
-				"transport":each_category[5],
-				"mrt":each_category[6],
-				"latitude":each_category[7],
-				"longitude":each_category[8],
+				"id":each_keyword[0],
+				"name":each_keyword[1],
+				"category":each_keyword[2],
+				"description":each_keyword[3],
+				"address":each_keyword[4],
+				"transport":each_keyword[5],
+				"mrt":each_keyword[6],
+				"latitude":each_keyword[7],
+				"longitude":each_keyword[8],
 				"images":images}
 				# print(each_data)
 				keyword_data.append(each_data)
 			
-			if(len(category)-(page*12))<12:
-				for i in range(page*12,page*12+(len(category)-(page*12))):
+			if(len(Matched_keywords)-(page*12))<12:
+				for i in range(page*12,page*12+(len(Matched_keywords)-(page*12))):
 					page_keyword_data.append(keyword_data[i])
 			else:
 				for i in range(page*12,page*12+11+1):
@@ -77,29 +78,29 @@ def api_attractions():
 			print(len(keyword_data))
 		else:
 			cursor.execute(f"SELECT * FROM attractions")
-			category=cursor.fetchall()
-			if(len(category)-(page*12+12))>0:
+			Matched_keywords=cursor.fetchall()
+			if(len(Matched_keywords)-(page*12+12))>0:
 				nextPage=page+1
 			else:
 				nextPage=None
 			
-			for each_category in category:
-				images=json.loads(each_category[9])
+			for each_keyword in Matched_keywords:
+				images=json.loads(each_keyword[9])
 				each_data={
-				"id":each_category[0],
-				"name":each_category[1],
-				"category":each_category[2],
-				"description":each_category[3],
-				"address":each_category[4],
-				"transport":each_category[5],
-				"mrt":each_category[6],
-				"latitude":each_category[7],
-				"longitude":each_category[8],
+				"id":each_keyword[0],
+				"name":each_keyword[1],
+				"category":each_keyword[2],
+				"description":each_keyword[3],
+				"address":each_keyword[4],
+				"transport":each_keyword[5],
+				"mrt":each_keyword[6],
+				"latitude":each_keyword[7],
+				"longitude":each_keyword[8],
 				"images":images}
 				page_data.append(each_data)
 				
-			if(len(category)-(page*12))<12:
-				for i in range(page*12,page*12+(len(category)-(page*12))):
+			if(len(Matched_keywords)-(page*12))<12:
+				for i in range(page*12,page*12+(len(Matched_keywords)-(page*12))):
 					page_keyword_data.append(page_data[i])
 			else:
 				for i in range(page*12,page*12+11+1):
