@@ -5,7 +5,7 @@ import json
 db=mysql.connector.connect(
     host="localhost",
     user="root",
-    password="su3cl3jo3m6"
+    password="su3cl3jo3m6@A"
 )
 cursor = db.cursor()
 cursor.execute("CREATE DATABASE IF NOT EXISTS taipei_web_data")

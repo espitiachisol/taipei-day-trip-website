@@ -10,7 +10,7 @@ app.config["DEBUG"] = True
 db=mysql.connector.connect(
     host="localhost",
     user="root",
-    password="su3cl3jo3m6"
+    password="su3cl3jo3m6@A"
 )
 cursor = db.cursor(buffered=True)
 cursor.execute("USE taipei_web_data")
