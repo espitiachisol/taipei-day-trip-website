@@ -1,11 +1,12 @@
 from flask import *
 import mysql.connector
 import json
-app=Flask(__name__)
+app=Flask(__name__,static_folder="static", 
+static_url_path="/")
+
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config["DEBUG"] = True
-
 #connect database
 db=mysql.connector.connect(
     host="localhost",
@@ -14,10 +15,6 @@ db=mysql.connector.connect(
 )
 cursor = db.cursor(buffered=True)
 cursor.execute("USE taipei_web_data")
-#attractions count 
-cursor.execute("SELECT COUNT(id) FROM attractions")
-attractions_counts= cursor.fetchone()
-
 # Pages
 @app.route("/")
 def index():
@@ -40,78 +37,51 @@ def api_attractions():
 	if page:
 		page=int(page)
 		nextPage=0
-		keyword_data=[]
-		page_keyword_data=[]
-		page_data=[]
+		result=[]
+		#輸入keyword和page的判斷	
 		if keyword:
-			cursor.execute(f"SELECT * FROM attractions WHERE name LIKE '%{keyword}%'")
-			Matched_keywords=cursor.fetchall()
-			if(len(Matched_keywords)-(page*12+12))>0:
-				nextPage=page+1
-			else:
-				nextPage=None
+			#根據所在page得到資料庫的十二筆資料
+			cursor.execute(f"SELECT * FROM attractions WHERE name LIKE '%{keyword}%' ORDER BY id LIMIT {page*12},12")
+			matched_data=cursor.fetchall()
+			#得到資料庫總筆數
+			cursor.execute(f"SELECT COUNT(id) FROM attractions WHERE name LIKE '%{keyword}%'")
+			attractions_counts= cursor.fetchone()
 
-			for each_keyword in Matched_keywords:
-				# print(each_keyword)
-				images=json.loads(each_keyword[9])
-				each_data={
-				"id":each_keyword[0],
-				"name":each_keyword[1],
-				"category":each_keyword[2],
-				"description":each_keyword[3],
-				"address":each_keyword[4],
-				"transport":each_keyword[5],
-				"mrt":each_keyword[6],
-				"latitude":each_keyword[7],
-				"longitude":each_keyword[8],
-				"images":images}
-				# print(each_data)
-				keyword_data.append(each_data)
-			
-			if(len(Matched_keywords)-(page*12))<12:
-				for i in range(page*12,page*12+(len(Matched_keywords)-(page*12))):
-					page_keyword_data.append(keyword_data[i])
-			else:
-				for i in range(page*12,page*12+11+1):
-					page_keyword_data.append(keyword_data[i])
-			# print(len(keyword_data))
+		#只有輸入Page的判斷	
+		else: 
+			#根據所在page得到資料庫的十二筆資料
+			cursor.execute(f"SELECT * FROM attractions ORDER BY id LIMIT {page*12},12")
+			matched_data=cursor.fetchall()
+			#得到資料庫總筆數
+			cursor.execute("SELECT COUNT(id) FROM attractions")
+			attractions_counts= cursor.fetchone()
+		#nextpage判斷
+		if(attractions_counts[0]-(page*12+12))>0:
+			nextPage=page+1
 		else:
-			cursor.execute(f"SELECT * FROM attractions")
-			Matched_keywords=cursor.fetchall()
-			if(len(Matched_keywords)-(page*12+12))>0:
-				nextPage=page+1
-			else:
-				nextPage=None
+			nextPage=None
+		#將得到資料放入json格式資料
+		for each_matched_data in matched_data:
+			images=json.loads(each_matched_data[9])
+			each_matched_data={
+			"id":each_matched_data[0],
+			"name":each_matched_data[1],
+			"category":each_matched_data[2],
+			"description":each_matched_data[3],
+			"address":each_matched_data[4],
+			"transport":each_matched_data[5],
+			"mrt":each_matched_data[6],
+			"latitude":each_matched_data[7],
+			"longitude":each_matched_data[8],
+			"images":images}
+			# print(each_matched_data)
+			result.append(each_matched_data)
 			
-			for each_keyword in Matched_keywords:
-				images=json.loads(each_keyword[9])
-				each_data={
-				"id":each_keyword[0],
-				"name":each_keyword[1],
-				"category":each_keyword[2],
-				"description":each_keyword[3],
-				"address":each_keyword[4],
-				"transport":each_keyword[5],
-				"mrt":each_keyword[6],
-				"latitude":each_keyword[7],
-				"longitude":each_keyword[8],
-				"images":images}
-				page_data.append(each_data)
-				
-			if(len(Matched_keywords)-(page*12))<12:
-				for i in range(page*12,page*12+(len(Matched_keywords)-(page*12))):
-					page_keyword_data.append(page_data[i])
-			else:
-				for i in range(page*12,page*12+11+1):
-					page_keyword_data.append(page_data[i])
-
-		#return json format data
-		data={"nextPage": nextPage,
-		"data":page_keyword_data
-		}
+		#回傳json格式
+		data={"nextPage": nextPage,"data":result}
 		data=json.dumps(data)
 		return (data,200)
-
+		
 	else:
 		data={"error": True,"message": "自訂的錯誤訊息"}
 		data=json.dumps(data)
@@ -120,10 +90,14 @@ def api_attractions():
 
 @app.route("/api/attraction/<attractionId>")
 def api_attraction(attractionId):
+	#得到資料庫總筆數
+	cursor.execute("SELECT COUNT(id) FROM attractions")
+	attractions_counts= cursor.fetchone()
 	
 	if attractionId.isnumeric() and (int(attractionId)<attractions_counts[0]): 
 		cursor.execute(f"SELECT * FROM attractions WHERE id={attractionId}")
 		api_attraction=cursor.fetchone()
+		#將得到資料放入json格式資料
 		if api_attraction:
 			images=json.loads(api_attraction[9])
 			data={
@@ -139,10 +113,10 @@ def api_attraction(attractionId):
 				"longitude":api_attraction[8],
 				"images":images}
 			}
+			#回傳json格式
 			data=json.dumps(data)
-			# print(api_attraction)
-			
 			return (data,200)
+
 		else:
 			data={"error": True,"message": "自訂的錯誤訊息"}
 			data=json.dumps(data)
@@ -155,7 +129,8 @@ def api_attraction(attractionId):
 
 
 if __name__=="__main__":
-	app.run(host="0.0.0.0", port=3000)
+	# app.run(host="0.0.0.0", port=3000)
+	app.run(port=3000)
 
 
 

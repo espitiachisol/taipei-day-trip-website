@@ -1,0 +1,241 @@
+/* reset */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  /* 把font-size調整成1rem=10px */
+}
+a,
+a:visited,
+a:link {
+  text-decoration: none;
+}
+body {
+  color: rgba(117, 117, 117, 1);
+  box-sizing: border-box;
+  text-align: center;
+  font-family: sans-serif;
+  font-weight: 500;
+  font-size: 1.6rem;
+}
+/* header section */
+.header-container {
+  position: sticky;
+  background-color: #fffffff5;
+  width: 100%;
+  top: 0;
+  z-index: 1;
+}
+header {
+  margin: 0 auto;
+  display: flex;
+  max-width: 1200px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  font-weight: 700;
+  font-size: 3rem;
+  color: rgba(68, 136, 153, 1);
+}
+.items {
+  display: flex;
+  justify-content: space-between;
+}
+.items a {
+  padding-left: 2rem;
+  color: rgb(102, 102, 102);
+}
+/* welcome section */
+.welcome {
+  width: 100%;
+  height: 36rem;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(171, 221, 237),
+    rgb(108, 173, 189)
+  );
+  position: relative;
+  padding-top: 4rem;
+  display: block;
+}
+
+.welcome-img {
+  min-width: 30%;
+  height: 90%;
+  object-fit: cover;
+  bottom: 0;
+  right: 10%;
+  position: absolute;
+}
+.welcome-form {
+  position: relative;
+  color: white;
+  margin: 6rem auto;
+  max-width: 1200px;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-content: space-around;
+}
+.welcome-form h1 {
+  font-weight: 700;
+  font-size: 2.8rem;
+}
+.welcome-form p {
+  font-weight: 400;
+  margin-top: 1.6rem;
+}
+
+.search-attractions {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 1.6rem;
+}
+.btn-search-attractions {
+  background-color: rgb(71, 136, 152);
+  color: white;
+  width: 6rem;
+  height: 4rem;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+.btn-search-attractions:hover {
+  background-color: rgb(61, 117, 131);
+}
+.btn-search-attractions:active {
+  background-color: rgb(71, 136, 152);
+}
+.input-keyword {
+  min-width: 40%;
+  height: 4rem;
+  padding: 0 2rem 0 2rem;
+  border: none;
+  border-radius: 4px 0 0 4px;
+}
+
+.icon_search {
+  width: 3rem;
+  height: 3rem;
+}
+/* pics section */
+.pics-section {
+  margin: 4rem auto 0rem auto;
+  min-height: 400px;
+  max-width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-items: stretch;
+}
+.box {
+  width: 23.5%;
+  margin-bottom: 2rem;
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(117, 117, 117, 1);
+  cursor: pointer;
+  text-align: start;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+}
+.error-message {
+  margin: auto;
+}
+.box img {
+  width: 100%;
+  height: 20rem;
+  object-fit: cover;
+}
+
+.div-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.6rem;
+  padding: 1.2rem;
+  padding-top: 0;
+}
+
+.img-title {
+  padding: 1.2rem;
+  font-weight: 700;
+}
+
+/* Hamburger-Menu */
+/* .show {
+  display: none;
+} */
+
+@media screen and (max-width: 1200px) {
+  /* header section */
+  header {
+    width: 95%;
+  }
+  /* welcome section */
+  .welcome-img {
+    min-width: 25%;
+    height: 70%;
+    right: 0%;
+  }
+  .welcome-form {
+    max-width: 95%;
+  }
+
+  /* pics section */
+  .pics-section {
+    width: 95%;
+  }
+  .box {
+    width: 48.5%;
+    margin-bottom: 2rem;
+  }
+  .box img {
+    height: 25rem;
+  }
+  /* Hamburger-Menu */
+  /* .show img {
+    display: none;
+  } */
+}
+@media (max-width: 600px) {
+  /* welcome section */
+  .welcome {
+    overflow: hidden;
+  }
+  .welcome-img {
+    min-width: 40%;
+    height: 50%;
+    right: -20%;
+  }
+  .welcome-form {
+    max-width: 95%;
+  }
+  header {
+    width: 95%;
+  }
+
+  /* pics section */
+  .box {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  /* Hamburger-Menu */
+  /* .hidden {
+    display: none;
+  }
+  .show img {
+    display: inline-block;
+    height: 2rem;
+    width: 3rem;
+  /* } */
+}
