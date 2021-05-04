@@ -26,11 +26,13 @@ body {
 }
 /* header section */
 .header-container {
-  position: sticky;
+  position: fixed;
   background-color: #fffffff5;
   width: 100%;
   top: 0;
   z-index: 1;
+  padding: 0.5rem 0;
+  box-shadow: 0px 1px 3px rgba(102, 102, 102, 0.3);
 }
 header {
   margin: 0 auto;
@@ -56,20 +58,20 @@ header {
 /* welcome section */
 .welcome {
   width: 100%;
-  height: 36rem;
+  min-height: 36rem;
   background-image: linear-gradient(
     to bottom,
     rgb(171, 221, 237),
     rgb(108, 173, 189)
   );
   position: relative;
-  padding-top: 4rem;
+  padding-top: 5.2rem;
   display: block;
 }
 
 .welcome-img {
-  min-width: 30%;
-  height: 90%;
+  min-width: 25%;
+  height: 80%;
   object-fit: cover;
   bottom: 0;
   right: 10%;
@@ -78,7 +80,7 @@ header {
 .welcome-form {
   position: relative;
   color: white;
-  margin: 6rem auto;
+  margin: 8rem auto;
   max-width: 1200px;
   text-align: start;
   display: flex;
@@ -89,10 +91,12 @@ header {
 .welcome-form h1 {
   font-weight: 700;
   font-size: 2.8rem;
+  letter-spacing: 0.5rem;
 }
 .welcome-form p {
   font-weight: 400;
   margin-top: 1.6rem;
+  letter-spacing: 0.5rem;
 }
 
 .search-attractions {
@@ -129,8 +133,8 @@ header {
 }
 /* pics section */
 .pics-section {
-  margin: 4rem auto 0rem auto;
-  min-height: 400px;
+  margin: 4rem auto 15rem auto;
+  min-height: 320px;
   max-width: 1200px;
   display: flex;
   flex-wrap: wrap;
@@ -156,6 +160,9 @@ header {
   height: 20rem;
   object-fit: cover;
 }
+.box img:hover {
+  opacity: 0.8;
+}
 
 .div-info {
   display: flex;
@@ -169,7 +176,17 @@ header {
   padding: 1.2rem;
   font-weight: 700;
 }
-
+/* footer section */
+footer {
+  min-height: 10rem;
+  margin-top: 4rem;
+  background-color: rgba(117, 117, 117, 1);
+}
+footer p {
+  color: white;
+  margin: 0 auto;
+  padding-top: 4rem;
+}
 /* Hamburger-Menu */
 /* .show {
   display: none;
@@ -206,7 +223,7 @@ header {
     display: none;
   } */
 }
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   /* welcome section */
   .welcome {
     overflow: hidden;
@@ -217,7 +234,11 @@ header {
     right: -20%;
   }
   .welcome-form {
-    max-width: 95%;
+    max-width: 90%;
+  }
+
+  .welcome-form p {
+    margin: 1.6rem 0;
   }
   header {
     width: 95%;
@@ -228,7 +249,15 @@ header {
     width: 100%;
     margin-bottom: 2rem;
   }
-
+  .input-keyword {
+    min-width: 80%;
+    height: 5rem;
+    padding: 0 2rem 0 2rem;
+  }
+  .btn-search-attractions {
+    width: 8rem;
+    height: 5rem;
+  }
   /* Hamburger-Menu */
   /* .hidden {
     display: none;
