@@ -1,21 +1,10 @@
 "use strict";
-
-let imagesLoaded = 0;
-let totalDataLength = 0;
 let current_page = 0;
 let keyword, data;
 let ready = false;
 let src = `/api/attractions?page=${current_page}`;
 let pics_section = document.getElementById("pics-section");
 
-const imageLoaded = function () {
-  imagesLoaded++;
-  // console.log("imagesLoaded: ", imagesLoaded);
-  if (imagesLoaded === totalDataLength) {
-    ready = true;
-    // console.log("ready = ", ready);
-  }
-};
 const errorNoResult = function () {
   let errorMessage = document.createElement("P");
   errorMessage.textContent = " ↖︎ 您的查詢沒有結果，請再次查詢 ☺︎";
@@ -23,12 +12,12 @@ const errorNoResult = function () {
   pics_section.appendChild(errorMessage);
 };
 const displayPhotos = function () {
-  imagesLoaded = 0;
-  totalDataLength = data.data.length;
+  // let totalDataLength = data.data.length;
   // console.log("total data num: ", totalDataLength);
   data.data.forEach((element) => {
     // console.log(element);
     //創建容器
+    // let attraction = document.createElement();
     let div_box = document.createElement("div");
     let div_img = document.createElement("img");
     let div_p_img_title = document.createElement("P");
@@ -38,6 +27,10 @@ const displayPhotos = function () {
     //放入class name
     div_box.classList.add("box");
     div_img.classList.add("img");
+    div_box.setAttribute(
+      "onclick",
+      `window.open( '/attraction/${element.id}','_top' ); return false;`
+    );
     div_p_img_title.classList.add("img-title");
     div_div_info.classList.add("div-info");
     div_div_info_location.classList.add("mrt");
@@ -47,8 +40,6 @@ const displayPhotos = function () {
     div_p_img_title.textContent = element.name;
     div_div_info_location.textContent = element.mrt;
     div_div_info_category.textContent = element.category;
-    //計算多少個image被loaded
-    div_img.addEventListener("load", imageLoaded);
     //放入容器
     pics_section.appendChild(div_box);
     div_box.appendChild(div_img);
@@ -64,6 +55,7 @@ async function getPhotos(src) {
     const response = await fetch(src);
     data = await response.json();
     if (data.data[0]) {
+      ready = true;
       displayPhotos();
     } else {
       errorNoResult();
