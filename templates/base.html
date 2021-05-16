@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png"/>
+    <link rel="stylesheet" href="/css/base.css">
+    {% block css %}{% endblock %}
+  
+  </head>
+  <body>
+    <div class="header-container">
+      <header>
+        <h1 class="logo"><a href="/">台北一日遊</a></h1>
+
+        <div class="items">
+          <a href="/booking">預定行程</a>
+          <a  id="loginSignin" onclick="showModal();" class="hidden">登入/註冊</a>
+          <a id="logOut"class="hidden">登出帳戶</a>
+        </div>
+      </header>
+    </div>
+    
+    <div class="overlay hidden">
+      <div class="login-Signin-modal hidden">
+        <button class="close-modal" onclick="closeModal();">&#x02DF</button>
+        <form action="/api/user" id="login">
+        <div class="login">
+          <h3>登入會員帳號</h3>
+          <input class="login-signin-input"type="email" placeholder="電子郵件" id="login_email"/>
+          <input class="login-signin-input"type="password" placeholder="密碼" id="login_password"/>
+  
+          <button class="login-signin-btn" type="submit" >登入帳戶</button>
+          <h6 class="login-signin-p loginErrorMessage hidden"></h6>
+          <p class="login-signin-p">還沒有帳戶？<a class="login-signin-link" onclick="switchToSignin()" > 點此註冊</a></p>
+        </div>
+      </form>
+      <form  id="signin"class="signin hidden">
+          <h3>註冊會員帳號</h3>
+          <input class="login-signin-input"type="text" placeholder="姓名" id="signin_username"/>
+          <input class="login-signin-input"type="email" placeholder="電子郵件"  id="signin_email"/>
+          <input class="login-signin-input"type="password" placeholder="密碼"id="signin_password"/>
+          
+          <button class="login-signin-btn" type="submit" >註冊新帳戶</button>
+          <h6 class=" login-signin-p siginErrorMessage hidden"></h6>
+          <p class="login-signin-p">已經有帳戶了？<a class="login-signin-link" onclick="switchToLogin()"> 點此登入</a></p>
+      </form>
+      <p class="hidden login-sigin-succeeded"></p>
+      </div>
+    </div>
+{% block main %} {% endblock %}
+
+<footer class="footer">
+    <p>&copy 2021 COPYRIGHT 台北一日遊</p>
+  </footer>
+  <script src="/js/base.js"></script>
+  {% block js %}{% endblock %}
+  
+  
+</body>
+</html>

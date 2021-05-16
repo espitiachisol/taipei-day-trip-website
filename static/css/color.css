@@ -1,0 +1,17 @@
+:root {
+  --cyan-color-dark: rgba(61, 122, 139, 1);
+  --cyan-color-main: rgba(68, 136, 153, 1);
+  --cyan-color-normal: rgba(102, 170, 187, 1);
+  --cyan-color-light: rgba(170, 221, 238, 1);
+  --cyan-color-light-2: rgba(170, 221, 238, 0.2);
+  --gery-color-dark: rgba(102, 102, 102, 1);
+  --gery-color-dark-trans-3: rgba(102, 102, 102, 0.3);
+  --black-color-trans-3: rgba(0, 0, 0, 0.3);
+  --gery-color-normal: rgba(117, 117, 117, 1);
+  --gery-color-light: rgba(232, 232, 232, 1);
+  --gery-color-light-bg: rgb(245, 245, 245);
+  --gery-color-white: rgba(248, 248, 248, 1);
+  --white-color: rgba(255, 255, 255, 1);
+  --white-color-tran-9: rgba(255, 255, 255, 0.9);
+  --white-color-tran-4: rgba(255, 255, 255, 0.4);
+}

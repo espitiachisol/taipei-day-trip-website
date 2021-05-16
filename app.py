@@ -1,12 +1,15 @@
 from flask import *
 import mysql.connector
-import json
+import json, time,secrets
+
 app=Flask(__name__,static_folder="static", 
 static_url_path="/")
+
 
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config["DEBUG"] = True
+app.config['SECRET_KEY'] = secrets.token_hex(16)
 #connect database
 db=mysql.connector.connect(
     host="localhost",
@@ -126,6 +129,68 @@ def api_attraction(attractionId):
 		data={"error": True,"message": "自訂的錯誤訊息"}
 		data=json.dumps(data)
 		return (data,400)
+
+@app.route("/api/user",methods=["GET","POST","PATCH","DELETE"])
+def api_user():
+	if request.method == "POST":
+		username=request.json["name"]
+		email=request.json["email"]
+		password=request.json["password"]
+		if username and email and password:
+			cursor.execute("SELECT * FROM users WHERE email = %s",(email,))
+			currentUserEmail=cursor.fetchone()
+			if currentUserEmail:
+				return jsonify({"error": True,"message": "email重複"}),400
+			else:
+				print(username,email,password)
+				val = (username, email, password)
+				sql = "INSERT INTO users (name, email,password) VALUES (%s, %s, %s)"
+				cursor.execute(sql, val)
+				db.commit()
+				return jsonify({"ok": True}),200
+
+		return jsonify({"error": True,"message": "輸入不完整"}),400
+
+	elif request.method =="GET":
+		 userEmail=session.get('userEmail')
+		 if userEmail:
+			 cursor.execute("SELECT * FROM users WHERE email = %s",(userEmail,))
+			 currentUserEmail=cursor.fetchone()
+			 data={"data":
+			 {"id":currentUserEmail[0],
+			 "name":currentUserEmail[1],"email":currentUserEmail[2]}}
+			 print(data)
+			 return  jsonify(data),200
+
+		 return jsonify({"data":None}),200
+		 
+		
+
+	elif request.method=="PATCH":
+		email=request.json["email"]
+		password=request.json["password"]
+		if email and password:
+			cursor.execute("SELECT email FROM users WHERE email = %s",(email,))
+			currentUserEmail = cursor.fetchone()
+			if currentUserEmail:
+				cursor.execute("SELECT * FROM users WHERE email = %s and password = %s",(email, password))
+				currentUser = cursor.fetchone()
+				if currentUser:
+					session['userEmail']=email
+					return jsonify({"ok": True}),200
+				else:
+					return jsonify({"error":True,"message": "密碼不正確"}),500
+			return jsonify({"error":True,"message": "帳號或密碼不正確"}),500
+		return jsonify({"error":True,"message": "輸入不完整"}),400
+
+	elif request.method=="DELETE":
+		userEmail=session.get('userEmail')
+		if userEmail:
+			session.pop('userEmail',None)
+			return jsonify({"ok": True}),200
+		else:
+			return jsonify({"error":True,"message": "找不到帳號"})
+
 
 
 if __name__=="__main__":

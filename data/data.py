@@ -12,6 +12,8 @@ cursor.execute("CREATE DATABASE IF NOT EXISTS taipei_web_data")
 cursor.execute("USE taipei_web_data")
 cursor.execute("CREATE TABLE IF NOT EXISTS attractions ( id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,name VARCHAR(255), category VARCHAR(255), description TEXT(65535),address TEXT(65535),transport TEXT(65535),mrt TEXT(65535),latitude FLOAT(10,6),longitude FLOAT(10,6), images TEXT(65535) NOT NULL)")
 
+cursor.execute("CREATE TABLE IF NOT EXISTS users( id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,name VARCHAR(255), email VARCHAR(255), password VARCHAR(255))")
+
 with open('taipei-attractions.json',mode='r',encoding='utf-8')as file:
     data=json.load(file)
     for each in data['result']['results']:
