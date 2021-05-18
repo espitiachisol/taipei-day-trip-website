@@ -1,56 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>台北一日遊</title>
-    <link rel="stylesheet" href="/index.css" />
-    <style></style>
-  </head>
-  <body>
-    <div class="header-container">
-      <header>
-        <p class="logo"><a href="/">台北一日遊</a></p>
+{% extends "base.html" %} {% block title %} 台北一日遊{% endblock %} {% block
+css %}<link rel="stylesheet" href="/css/index.css" />{% endblock %}{% block main
+%}
+<div class="welcome">
+  <img class="welcome-img" src="/images/welcome.png" alt="" />
 
-        <div class="items">
-          <a class="hidden" href="#">預定行程</a>
-          <a class="hidden" href="#">登入/註冊</a>
-          <!-- <a href="#" class="show"
-            ><img src="/images/Hamburger-Menu.png" alt="Hamburger-Menu"
-          /></a> -->
-        </div>
-      </header>
+  <div class="welcome-form">
+    <h2>輕鬆享受台北一日悠閒</h2>
+    <p>探索每個角落，體驗城市的深度旅遊行程</p>
+    <div class="search-attractions">
+      <input
+        class="input-keyword"
+        type="text"
+        id="keyword"
+        placeholder="輸入景點名稱查詢"
+      />
+      <button
+        type="submit"
+        id="getKeywordAttractions"
+        class="btn-search-attractions"
+        onclick="getKeywordAttractions();"
+      >
+        <img class="icon_search" src="/images/icon_search.png" alt="" />
+      </button>
     </div>
-    <div class="welcome">
-      <img class="welcome-img" src="/images/welcome.png" alt="" />
+  </div>
+</div>
 
-      <div class="welcome-form">
-        <h1>輕鬆享受台北一日悠閒</h1>
-        <p>探索每個角落，體驗城市的深度旅遊行程</p>
-        <div class="search-attractions">
-          <input
-            class="input-keyword"
-            type="text"
-            id="keyword"
-            placeholder="輸入景點名稱查詢"
-          />
-          <button
-            type="submit"
-            id="getKeywordAttractions"
-            class="btn-search-attractions"
-            onclick="getKeywordAttractions();"
-          >
-            <img class="icon_search" src="/images/icon_search.png" alt="" />
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="pics-section" id="pics-section"></div>
-    <script src="/index.js"></script>
-    <footer class="footer">
-      <p>©2021 COPYRIGHT 台北一日遊</p>
-    </footer>
-  </body>
-</html>
+<div class="pics-section" id="pics-section"></div>
+{% endblock %} {% block js %}
+<script src="/js/index.js"></script>
+{% endblock %}

@@ -53,7 +53,7 @@ async function getData(src) {
   try {
     let response = await fetch(src);
     data = await response.json();
-    console.log(data);
+    // console.log(data);
     displayContent();
     displayPhotos();
     showSlides(slideIndex);
@@ -109,5 +109,6 @@ function showSlides(n) {
   slides[slideIndex - 1].style.display = "block";
   dots[slideIndex - 1].className += " active";
 }
+
 // onload
 getData(src);

@@ -1,0 +1,92 @@
+.booking-section-main {
+  line-height: 1.5;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: start;
+  padding: 5.2rem 10rem 0 10rem;
+}
+.booking-section-title {
+  margin-top: 4rem;
+  margin-bottom: 0;
+}
+.booking-section-attraction-info,
+.booking-section-user-contact-info,
+.booking-section-user-credit {
+  border-bottom: 1px solid var(--gery-color-dark-trans-3);
+  padding: 4rem 0;
+}
+input,
+h4,
+p {
+  display: inline-block;
+}
+h5 {
+  margin-bottom: 1rem;
+}
+.block {
+  display: block;
+}
+.booking-input-style {
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  background-color: var(--gery-color-light-bg);
+  border: 2px solid transparent;
+  transition: all 0.1s ease-in;
+}
+.booking-input-style:focus {
+  outline: none;
+  border: 2px solid var(--cyan-color-normal);
+  background-color: var(--white-color);
+  /* box-shadow: inset 0px 1px 6px var(--gery-color-dark-trans-3); */
+}
+
+.booking-section-attraction-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.attraction-info-img {
+  min-width: 30%;
+  background-color: var(--gery-color-light);
+}
+.attraction-info-detail {
+  min-width: 60%;
+  min-height: 18rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 2rem;
+}
+.attraction-info-delete {
+  min-width: 3%;
+  background-color: var(--gery-color-light);
+}
+
+.booking-section-user-contact-info {
+  min-height: 30rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.booking-section-user-credit {
+  min-height: 26rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+@media (max-width: 800px) {
+  .booking-section-main {
+    width: 90%;
+    padding: 5.2rem 0 0 0;
+  }
+  .booking-section-user-contact-info {
+    min-height: 32rem;
+  }
+  .booking-section-user-credit {
+    min-height: 28rem;
+  }
+}
