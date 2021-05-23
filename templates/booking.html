@@ -3,75 +3,97 @@ css %}<link rel="stylesheet" href="/css/booking.css" />{% endblock %}{% block
 main %}
 <div class="booking-section-main">
   <h5 class="booking-section-title">
-    您好，<span>紀又瑜</span>，待預定的行程如下：
+    您好，<span class="booking-user-name">_ _ _</span>，待預定的行程如下：
   </h5>
-  <div class="booking-section-attraction-info">
-    <img class="attraction-info-img" src="" alt="" />
-    <div class="attraction-info-detail">
-      <div class="block">
-        <h4>台北一日遊：</h4>
-        <p>平安鎮</p>
+  <h5 class="no-attraction-ordered hidden">目前沒有任何待預定的行程</h5>
+  <div class="have-attraction-ordered hidden">
+    <div class="booking-section-attraction-info">
+      <img class="attraction-info-img" src="" alt="" />
+      <div class="attraction-info-detail">
+        <div class="block">
+          <h4 class="emphasize-font">台北一日遊：</h4>
+          <p class="emphasize-font attraction-info-name"></p>
+        </div>
+        <div class="block">
+          <h4>日期：</h4>
+          <p class="attraction-info-date"></p>
+        </div>
+        <div class="block">
+          <h4>時間：</h4>
+          <p class="attraction-info-time"></p>
+        </div>
+        <div class="block">
+          <h4>費用：</h4>
+          <p>新台幣 <span class="attraction-info-price"></span> 元</p>
+        </div>
+        <div class="block">
+          <h4>地點：</h4>
+          <p class="attraction-info-address"></p>
+        </div>
       </div>
-      <div class="block">
-        <h4>日期：</h4>
-        <p>2021-04-23</p>
-      </div>
-      <div class="block">
-        <h4>時間:</h4>
-        <p>早上 9 點到下午 4 點</p>
-      </div>
-      <div class="block">
-        <h4>費用：</h4>
-        <p>新台幣 2000 元</p>
-      </div>
-      <div class="block">
-        <h4>地點：</h4>
-        <p>臺北市 大安區忠孝東路4段</p>
-      </div>
-    </div>
-    <img class="attraction-info-delete" src="" alt="" />
-  </div>
-  <div class="booking-section-user-contact-info">
-    <h5>您的聯絡資訊</h5>
-    <div class="block">
-      <p>聯絡姓名：</p>
-      <input class="booking-input-style" type="text" id="user-contact-name" />
-    </div>
-    <div class="block">
-      <p>聯絡信箱：</p>
-      <input class="booking-input-style" type="text" id="user-contact-email" />
-    </div>
-    <div class="block">
-      <p>手機號碼：</p>
-      <input class="booking-input-style" type="text" id="user-contact-phone" />
-    </div>
-    <h4>
-      請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。
-    </h4>
-  </div>
-  <div class="booking-section-user-credit">
-    <h5>信用卡付款資訊</h5>
-    <div class="block">
-      <p>卡片號碼：</p>
-      <input class="booking-input-style" type="text" id="user-credit-number" />
-    </div>
-    <div class="block">
-      <p>過期時間：</p>
-      <input class="booking-input-style" type="text" id="user-credit-expired" />
-    </div>
-    <div class="block">
-      <p>驗證密碼：</p>
-      <input
-        class="booking-input-style"
-        type="text"
-        id="user-credit-password"
+      <img
+        class="attraction-info-delete"
+        src="/images/icon_delete.svg"
+        alt=""
       />
     </div>
-  </div>
-
-  <div class="booking-section-confirm-order">
-    <h4>總價：新台幣2000元</h4>
-    <button type="submit">確認訂購並付款</button>
+    <div class="booking-section-user-contact-info">
+      <h5>您的聯絡資訊</h5>
+      <div class="block">
+        <p>聯絡姓名：</p>
+        <input class="booking-input-style" type="text" id="user-contact-name" />
+      </div>
+      <div class="block">
+        <p>聯絡信箱：</p>
+        <input
+          class="booking-input-style"
+          type="text"
+          id="user-contact-email"
+        />
+      </div>
+      <div class="block">
+        <p>手機號碼：</p>
+        <input
+          class="booking-input-style"
+          type="text"
+          id="user-contact-phone"
+        />
+      </div>
+      <p class="booking-notice">
+        請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。
+      </p>
+    </div>
+    <div class="booking-section-user-credit">
+      <h5>信用卡付款資訊</h5>
+      <div class="block">
+        <p>卡片號碼：</p>
+        <input
+          class="booking-input-style"
+          type="text"
+          id="user-credit-number"
+        />
+      </div>
+      <div class="block">
+        <p>過期時間：</p>
+        <input
+          class="booking-input-style"
+          type="text"
+          id="user-credit-expired"
+        />
+      </div>
+      <div class="block">
+        <p>驗證密碼：</p>
+        <input
+          class="booking-input-style"
+          type="text"
+          id="user-credit-password"
+        />
+      </div>
+    </div>
+    <div class="booking-section-confirm-order">
+      <h4>總價：新台幣<span class="booking-confirm-total"></span>元</h4>
+      <button type="submit" class="submit-booking-btn">確認訂購並付款</button>
+    </div>
   </div>
 </div>
 {% endblock %} {% block js %}

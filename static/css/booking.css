@@ -3,7 +3,7 @@
   max-width: 1200px;
   margin: 0 auto;
   text-align: start;
-  padding: 5.2rem 10rem 0 10rem;
+  padding: 5.2rem 10rem;
 }
 .booking-section-title {
   margin-top: 4rem;
@@ -15,6 +15,11 @@
   border-bottom: 1px solid var(--gery-color-dark-trans-3);
   padding: 4rem 0;
 }
+.no-attraction-ordered {
+  min-height: 85rem;
+  font-size: 1.6rem;
+  margin: 2rem auto 0 auto;
+}
 input,
 h4,
 p {
@@ -23,11 +28,19 @@ p {
 h5 {
   margin-bottom: 1rem;
 }
+.emphasize-font {
+  color: var(--cyan-color-main);
+  font-weight: 700;
+}
+.booking-notice {
+  margin-top: 2rem;
+}
 .block {
   display: block;
 }
 .booking-input-style {
   padding: 1rem 2rem;
+  margin-left: 1rem;
   border-radius: 5px;
   background-color: var(--gery-color-light-bg);
   border: 2px solid transparent;
@@ -46,25 +59,38 @@ h5 {
   justify-content: space-between;
 }
 .attraction-info-img {
-  min-width: 30%;
+  width: 30%;
+  height: 18rem;
+  object-fit: cover;
+  margin-right: 2rem;
   background-color: var(--gery-color-light);
 }
 .attraction-info-detail {
   min-width: 60%;
-  min-height: 18rem;
+  height: 18rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
   padding-bottom: 2rem;
 }
+
 .attraction-info-delete {
-  min-width: 3%;
-  background-color: var(--gery-color-light);
+  min-width: 2.5rem;
+  height: 2.5rem;
+  opacity: 0.6;
+  transition: all 0.1s ease-in-out;
+}
+.attraction-info-delete:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+.attraction-info-delete:active {
+  transform: scale(1);
 }
 
 .booking-section-user-contact-info {
-  min-height: 30rem;
+  min-height: 32rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -77,16 +103,108 @@ h5 {
   justify-content: space-between;
   align-items: flex-start;
 }
-
+.booking-section-confirm-order {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 4rem;
+}
+.submit-booking-btn {
+  display: inline-block;
+  padding: 1.5rem 4rem;
+  border-radius: 5px;
+  box-shadow: inset 0px 2px 3px 0px var(--cyan-color-normal);
+  background-color: var(--cyan-color-dark);
+  color: var(--white-color);
+  border: 1px solid var(--cyan-color-dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.submit-booking-btn:hover {
+  background-color: var(--cyan-color-main);
+}
+.submit-booking-btn:active {
+  background-color: var(--cyan-color-dark);
+}
 @media (max-width: 800px) {
   .booking-section-main {
-    width: 90%;
+    width: 100%;
     padding: 5.2rem 0 0 0;
+    margin: 0 auto;
   }
+
   .booking-section-user-contact-info {
-    min-height: 32rem;
+    min-height: 34rem;
   }
   .booking-section-user-credit {
     min-height: 28rem;
+  }
+  .booking-section-attraction-info {
+    padding-top: 0;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .attraction-info-img {
+    width: 100%;
+    min-height: 25rem;
+    margin: 0 auto;
+  }
+  .booking-section-user-contact-info > .block,
+  .booking-section-user-credit > .block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 7rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    align-items: flex-start;
+  }
+  .booking-input-style {
+    width: 100%;
+    margin-left: 0rem;
+  }
+
+  .attraction-info-detail {
+    width: 90%;
+    margin: 2rem auto 0 auto;
+
+    height: 20rem;
+  }
+  .attraction-info-delete {
+    margin-right: 2rem;
+    height: 2.5rem;
+    align-self: flex-end;
+  }
+  .booking-section-user-contact-info,
+  .booking-section-user-credit,
+  .booking-section-confirm-order {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .no-attraction-ordered {
+    width: 90%;
+    margin: 1rem auto;
+    min-height: 55rem;
+  }
+
+  .booking-section-title {
+    margin: 2rem auto 2rem auto;
+    width: 90%;
+  }
+  .have-attraction-ordered {
+    width: 100%;
+  }
+  .booking-section-confirm-order {
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 3rem;
+  }
+  .submit-booking-btn {
+    width: 100%;
+    margin-top: 2rem;
   }
 }
