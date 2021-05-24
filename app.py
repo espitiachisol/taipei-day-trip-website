@@ -191,13 +191,61 @@ def api_user():
 		else:
 			return jsonify({"error":True,"message": "找不到帳號"})
 
+@app.route("/api/booking",methods=["GET","POST","PATCH","DELETE"])
+def api_booking():
+	if request.method == "POST":
+		userEmail=session.get('userEmail')
+		if userEmail:
+			attractionId=request.json["attractionId"]
+			date=request.json["date"]
+			time=request.json["time"]
+			price=request.json["price"]
+			if attractionId and date and time and price:
+				val = (userEmail, attractionId, date,time,price)
+				sql = "INSERT INTO orders (usermail, attractionId,date, time, price) VALUES (%s, %s, %s, %s, %s)"
+				cursor.execute(sql, val)
+				db.commit()
+				return jsonify({"ok": True}),200
+
+			else:
+				return jsonify({"error":True,"message": "建立失敗，輸入不正確或其他原因"}),400
+
+		else:
+			return jsonify({"error":True,"message": "未登入系統，拒絕存取"}),403
+
+	if request.method == "GET":
+		userEmail=session.get('userEmail')
+		if userEmail:
+			 cursor.execute("SELECT * FROM orders WHERE usermail = %s ORDER BY orderId DESC",(userEmail,))
+			 userOrder=cursor.fetchone()
+			 if userOrder:
+				 cursor.execute("SELECT * FROM attractions WHERE id = %s",(userOrder[2],))
+				 userOrderattraction = cursor.fetchone()
+				 images=json.loads(userOrderattraction[9])
+				 data={"data":{"attraction":{"id":userOrderattraction[0],"name":userOrderattraction[1],"address":userOrderattraction[4],"image":images[0]},"date":userOrder[3],"time":userOrder[4],"price":userOrder[5]}}
+				
+				 print(jsonify(data))
+				 return  jsonify(data),200
+			 else:
+				 return jsonify({"error":True,"message": "沒有您的訂購"}),500
+
+		else:
+			return jsonify({"error":True,"message": "未登入系統，拒絕存取"}),403
+
+	if request.method == "DELETE":
+		userEmail=session.get('userEmail')
+		if userEmail:
+			cursor.execute("DELETE FROM orders WHERE usermail = %s ",(userEmail,))
+			db.commit()
+			return jsonify({"ok": True}),200
+		else:
+			return jsonify({"error":True,"message": "未登入系統，拒絕存取"}),403
+				 
 
 
 if __name__=="__main__":
 	app.run(host="0.0.0.0", port=3000)
 	# app.run(port=3000)
-
-
-
-
+db.close()
+cursor.close()
 

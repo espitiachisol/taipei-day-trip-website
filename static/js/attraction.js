@@ -12,6 +12,10 @@ let data;
 let slideIndex = 1;
 let timePeriod = document.querySelectorAll("input[name=time-period]");
 let price = document.getElementById("price");
+let date = document.querySelector("input[type='date']");
+let data_price = 2000;
+let data_time_period = "morning";
+
 //radio button
 timePeriod.forEach(function (e) {
   e.addEventListener("change", function (e) {
@@ -19,6 +23,8 @@ timePeriod.forEach(function (e) {
       price.textContent = "2000";
     } else if (e.target.id === "afternoon") {
       price.textContent = "2500";
+      data_price = 2500;
+      data_time_period = "afternoon";
     }
   });
 });
@@ -53,7 +59,7 @@ async function getData(src) {
   try {
     let response = await fetch(src);
     data = await response.json();
-    // console.log(data);
+    console.log(data);
     displayContent();
     displayPhotos();
     showSlides(slideIndex);
@@ -109,6 +115,39 @@ function showSlides(n) {
   slides[slideIndex - 1].style.display = "block";
   dots[slideIndex - 1].className += " active";
 }
-
+//booking
+document
+  .querySelector(".booking-section-info-order")
+  .addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (currentUser !== null) {
+      fetch("/api/booking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          attractionId: data.id,
+          date: date.value,
+          time: data_time_period,
+          price: data_price,
+        }),
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (text) {
+          window.location = "/booking";
+          if (text.error) {
+            console.log(text.error);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } else {
+      showModal();
+    }
+  });
 // onload
 getData(src);

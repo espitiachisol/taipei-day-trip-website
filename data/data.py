@@ -14,6 +14,8 @@ cursor.execute("CREATE TABLE IF NOT EXISTS attractions ( id BIGINT NOT NULL AUTO
 
 cursor.execute("CREATE TABLE IF NOT EXISTS users( id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,name VARCHAR(255), email VARCHAR(255), password VARCHAR(255))")
 
+cursor.execute("CREATE TABLE IF NOT EXISTS orders( orderId BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,usermail VARCHAR(255),attractionId BIGINT NOT NULL,date VARCHAR(255), time VARCHAR(255), price VARCHAR(255))")
+
 with open('taipei-attractions.json',mode='r',encoding='utf-8')as file:
     data=json.load(file)
     for each in data['result']['results']:
@@ -35,4 +37,7 @@ with open('taipei-attractions.json',mode='r',encoding='utf-8')as file:
         sql = "INSERT INTO attractions (name, category,description,address,transport,mrt,latitude,longitude,images) VALUES (%s, %s, %s,%s,%s,%s,%s,%s,%s)"
         cursor.execute(sql, val)
         db.commit()  
+        
+db.close()
+cursor.close()
 

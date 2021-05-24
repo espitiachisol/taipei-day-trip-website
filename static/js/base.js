@@ -19,8 +19,9 @@ const signinSubmit = document.getElementById("signin");
 
 const loginSignin = document.getElementById("loginSignin");
 const logOut = document.getElementById("logOut");
-
 const login_sigin_succeeded = document.querySelector(".login-sigin-succeeded");
+const bookingPage = document.querySelector(".bookingPage");
+let currentUser;
 
 function getCurrentUser() {
   fetch("/api/user", {
@@ -31,21 +32,30 @@ function getCurrentUser() {
     .then(function (response) {
       return response.json();
     })
-    .then(function (currentUser) {
-      if (currentUser.data) {
-        // console.log(currentUser.data);
+    .then(function (thisCurrentUser) {
+      if (thisCurrentUser.data) {
+        // console.log(thisCurrentUser.data);
         loginSignin.classList.add("hidden");
         logOut.classList.remove("hidden");
+        currentUser = thisCurrentUser.data.name;
       } else {
         loginSignin.classList.remove("hidden");
         logOut.classList.add("hidden");
-        // console.log("not login: ", currentUser);
+        // console.log("not login: ", thisCurrentUser);
+        currentUser = null;
       }
     })
     .catch(function (error) {
       console.log(error);
     });
 }
+bookingPage.addEventListener("click", function () {
+  if (currentUser) {
+    window.location = "/booking";
+  } else {
+    showModal();
+  }
+});
 const AllInput = document.querySelectorAll(".login-signin-input");
 AllInput.forEach(function (input) {
   input.addEventListener("click", () => {
@@ -81,7 +91,11 @@ logOut.addEventListener("click", function () {
         login_sigin_succeeded.textContent = "登出成功";
         login_sigin_succeeded.classList.remove("hidden");
         setTimeout(function () {
-          window.location = "/";
+          if (window.location.pathname === "/booking") {
+            window.location = "/";
+          } else {
+            window.location = window.location;
+          }
         }, 500);
       }
       console.log(text);
@@ -163,7 +177,7 @@ loginSubmit.addEventListener("submit", function (e) {
           login_sigin_succeeded.textContent = "登入成功";
           login_sigin_succeeded.classList.remove("hidden");
           setTimeout(function () {
-            window.location = "/";
+            window.location = window.location;
           }, 500);
         }
       } else {

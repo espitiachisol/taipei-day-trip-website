@@ -103,7 +103,7 @@ header {
 .items a {
   text-align: center;
   cursor: pointer;
-  margin-left: 2rem;
+  margin-left: 1.8rem;
   border: 3px solid transparent;
   color: var(--gery-color-dark);
 }
@@ -265,6 +265,8 @@ footer {
   margin-top: 4rem;
   text-align: center;
   background-color: var(--gery-color-normal);
+  display: block;
+  width: 100%;
 }
 footer p {
   color: var(--white-color);

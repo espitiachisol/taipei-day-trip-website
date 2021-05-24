@@ -5,6 +5,7 @@
   margin: 0 auto;
   text-align: start;
   padding-top: 5.2rem;
+  padding-bottom: 4rem;
 }
 
 .booking-section {
@@ -245,6 +246,7 @@ img {
     align-content: center;
     align-items: center;
   }
+
   .info-section {
     width: 90%;
     margin: 2rem auto;
