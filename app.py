@@ -240,7 +240,7 @@ def api_booking():
 			time=request.json["time"]
 			price=request.json["price"]
 			if attractionId and date and time and price:
-				val = (userEmail, attractionId, date,time,price,0)
+				val = (userEmail, attractionId, date,time,price)
 				sql = "INSERT INTO orders (usermail, attractionId,date, time, price) VALUES (%s, %s, %s, %s, %s)"
 				cursor.execute(sql, val)
 				cnx.commit()
