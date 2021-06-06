@@ -241,7 +241,7 @@ def api_booking():
 			price=request.json["price"]
 			if attractionId and date and time and price:
 				val = (userEmail, attractionId, date,time,price,0)
-				sql = "INSERT INTO orders (usermail, attractionId,date, time, price,status) VALUES (%s, %s, %s, %s, %s, %s)"
+				sql = "INSERT INTO orders (usermail, attractionId,date, time, price) VALUES (%s, %s, %s, %s, %s)"
 				cursor.execute(sql, val)
 				cnx.commit()
 				cnx.close()
@@ -297,7 +297,7 @@ def api_orders():
 		result=[]
 		userEmail=session.get('userEmail')
 		if userEmail:
-			cursor.execute("SELECT * FROM payStatus WHERE usermail = %s ORDER BY payStatusId DESC LIMIT 3 ",(userEmail,))
+			cursor.execute("SELECT * FROM payStatus WHERE usermail = %s AND status=  %s ORDER BY payStatusId DESC LIMIT 3 ",(userEmail,0,))
 			dataFromPayStatus=cursor.fetchall()
 			if dataFromPayStatus:
 				for eachData in dataFromPayStatus:
@@ -358,7 +358,6 @@ def api_orders():
 					"name": contactname,
 					"email": contactEmail,
 					},
-				"remember": True
 				}
 				headers = {
 					"Content-Type": "application/json",
