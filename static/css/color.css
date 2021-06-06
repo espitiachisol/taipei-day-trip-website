@@ -14,4 +14,6 @@
   --white-color: rgba(255, 255, 255, 1);
   --white-color-tran-9: rgba(255, 255, 255, 0.9);
   --white-color-tran-4: rgba(255, 255, 255, 0.4);
+  --red-color-normal: #d65350;
+  --red-color-light: rgb(255, 244, 244);
 }

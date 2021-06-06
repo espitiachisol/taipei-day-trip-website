@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% block title %} 台北一日遊{% endblock %} {% block
+css %} <link rel="stylesheet" href="/css/thankyou.css" />{% endblock %}{% block
+main %}
+<div class="thankyou-section-main">
+  <div class="thankyou-section-container">
+    <div class="thankyou-img-container">
+      <img class="thankyou-img animated-bg" />
+      <p class="more-attraction-info">詳細景點資訊 →</p>
+    </div>
+    <div class="thankyou-info-container">
+      <div class="thankyou-info-title">
+        <h3>您好，<span class="thankyou-userName"></span></h3>
+        <h3>感謝您預定台北一日遊</h3>
+      </div>
+      <div class="thankyou-info-order">
+        <h4>訂單號碼：</h4>
+        <h4 class="thankyou-info-orderNumber"></h4>
+
+        <div class="block">
+          <h4>台北一日遊：</h4>
+          <p class="thankyou-info-name"></p>
+        </div>
+        <div class="block">
+          <h4>日期：</h4>
+          <p class="thankyou-info-date"></p>
+        </div>
+        <div class="block">
+          <h4>時間：</h4>
+          <p class="thankyou-info-time"></p>
+        </div>
+        <div class="block">
+          <h4>費用：</h4>
+          <p>新台幣 <span class="thankyou-info-price"></span> 元</p>
+        </div>
+        <div class="block">
+          <h4>地點：</h4>
+          <p class="thankyou-info-address"></p>
+        </div>
+      </div>
+      <div class="thankyou-info-contact">
+        <div class="block">
+          <h4>聯絡姓名：</h4>
+          <p class="thankyou-user-contact-name"></p>
+        </div>
+        <div class="block">
+          <h4>聯絡信箱：</h4>
+          <p class="thankyou-user-contact-email"></p>
+        </div>
+        <div class="block">
+          <h4>手機號碼：</h4>
+          <p class="thankyou-user-contact-phone"></p>
+        </div>
+        <p>請保持手機暢通，準時到達，導覽人員將用手機與您聯繫</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %} {% block js %}
+
+<script src="/js/thankyou.js"></script>
+
+{% endblock %}

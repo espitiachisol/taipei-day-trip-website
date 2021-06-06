@@ -11,13 +11,14 @@ const errorNoResult = function () {
   errorMessage.classList.add("error-message");
   pics_section.appendChild(errorMessage);
 };
+// const createElement = function (element) {};
 const displayPhotos = function () {
   // let totalDataLength = data.data.length;
   // console.log("total data num: ", totalDataLength);
   data.data.forEach((element) => {
     // console.log(element);
     //創建容器
-    // let attraction = document.createElement();
+    // createElement(element);
     let div_box = document.createElement("div");
     let div_img = document.createElement("img");
     let div_p_img_title = document.createElement("P");
@@ -26,7 +27,7 @@ const displayPhotos = function () {
     let div_div_info_category = document.createElement("P");
     //放入class name
     div_box.classList.add("box");
-    div_img.classList.add("img");
+    div_img.classList.add("img", "animated-bg");
     div_box.setAttribute(
       "onclick",
       `window.open( '/attraction/${element.id}','_top' ); return false;`
@@ -35,11 +36,7 @@ const displayPhotos = function () {
     div_div_info.classList.add("div-info");
     div_div_info_location.classList.add("mrt");
     div_div_info_category.classList.add("category");
-    //放入data
-    div_img.src = element.images[0];
-    div_p_img_title.textContent = element.name;
-    div_div_info_location.textContent = element.mrt;
-    div_div_info_category.textContent = element.category;
+
     //放入容器
     pics_section.appendChild(div_box);
     div_box.appendChild(div_img);
@@ -47,6 +44,11 @@ const displayPhotos = function () {
     div_box.appendChild(div_div_info);
     div_div_info.appendChild(div_div_info_location);
     div_div_info.appendChild(div_div_info_category);
+    //放入data
+    div_img.src = element.images[0];
+    div_p_img_title.textContent = element.name;
+    div_div_info_location.textContent = element.mrt;
+    div_div_info_category.textContent = element.category;
   });
 };
 

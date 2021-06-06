@@ -21,6 +21,7 @@ const loginSignin = document.getElementById("loginSignin");
 const logOut = document.getElementById("logOut");
 const login_sigin_succeeded = document.querySelector(".login-sigin-succeeded");
 const bookingPage = document.querySelector(".bookingPage");
+const memberPage = document.querySelector(".memberPage");
 let currentUser;
 
 function getCurrentUser() {
@@ -37,11 +38,12 @@ function getCurrentUser() {
         // console.log(thisCurrentUser.data);
         loginSignin.classList.add("hidden");
         logOut.classList.remove("hidden");
-        currentUser = thisCurrentUser.data.name;
+        memberPage.classList.remove("hidden");
+        currentUser = thisCurrentUser.data;
       } else {
         loginSignin.classList.remove("hidden");
         logOut.classList.add("hidden");
-        // console.log("not login: ", thisCurrentUser);
+        memberPage.classList.add("hidden");
         currentUser = null;
       }
     })
@@ -56,10 +58,27 @@ bookingPage.addEventListener("click", function () {
     showModal();
   }
 });
+memberPage.addEventListener("click", function () {
+  if (currentUser) {
+    window.location = "/member";
+  } else {
+    window.location = "/";
+  }
+});
+const hamburgerMenu = document.querySelector(".hamburger-menu");
+const items = document.querySelector(".items");
+hamburgerMenu.addEventListener("click", () => {
+  items.classList.contains("flex")
+    ? items.classList.remove("flex")
+    : items.classList.add("flex");
+});
+
 const AllInput = document.querySelectorAll(".login-signin-input");
 AllInput.forEach(function (input) {
   input.addEventListener("click", () => {
     input.classList.remove("login-signin-input-error");
+    loginErrorMessage.textContent = "";
+    siginErrorMessage.textContent = "";
   });
 });
 
@@ -91,7 +110,10 @@ logOut.addEventListener("click", function () {
         login_sigin_succeeded.textContent = "登出成功";
         login_sigin_succeeded.classList.remove("hidden");
         setTimeout(function () {
-          if (window.location.pathname === "/booking") {
+          if (
+            window.location.pathname === "/booking" ||
+            window.location.pathname === "/member"
+          ) {
             window.location = "/";
           } else {
             window.location = window.location;
@@ -108,7 +130,6 @@ logOut.addEventListener("click", function () {
   logOut.classList.add("hidden");
 });
 
-// console.log(currentUser);
 const switchToLogin = function () {
   login_sigin_succeeded.classList.add("hidden");
   login.classList.remove("hidden");

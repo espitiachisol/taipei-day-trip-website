@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block title %} 台北一日遊{% endblock %} {% block
+css %} <link rel="stylesheet" href="/css/member.css" />{% endblock %}{% block
+main %}
+<div class="member-section-main animated-bg-sm">
+  <h3 class="history-title">訂單歷史紀錄</h3>
+  <h5 class="history-no-data hidden">您目前沒有歷史紀錄，請前往首頁預定行程</h5>
+  <div class="member-histories-container"></div>
+</div>
+
+{% endblock %} {% block js %}
+
+<script src="/js/member.js"></script>
+
+{% endblock %}
