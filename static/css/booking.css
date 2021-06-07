@@ -4,6 +4,7 @@
   margin: 0 auto;
   text-align: start;
   padding: 5.2rem 10rem;
+  min-height: 83rem;
 }
 .booking-section-title {
   margin-top: 4rem;
@@ -16,13 +17,13 @@
   padding: 4rem 0;
 }
 .no-attraction-ordered {
-  min-height: 85rem;
   font-size: 1.6rem;
   margin: 2rem auto 0 auto;
 }
 input,
 h4,
-p {
+p,
+label {
   display: inline-block;
 }
 h5 {
@@ -39,6 +40,8 @@ h5 {
   display: block;
 }
 .booking-input-style {
+  width: 20rem;
+  height: 3.8rem;
   padding: 1rem 2rem;
   margin-left: 1rem;
   border-radius: 5px;
@@ -63,7 +66,7 @@ h5 {
   height: 18rem;
   object-fit: cover;
   margin-right: 2rem;
-  background-color: var(--gery-color-light);
+  background-color: var(--gery-color-white);
 }
 .attraction-info-detail {
   min-width: 60%;
@@ -110,10 +113,14 @@ h5 {
   align-items: flex-start;
   margin-top: 4rem;
 }
-.submit-booking-btn {
+.error-msg {
+  display: block;
+  color: var(--red-color-normal);
+  text-align: start;
+}
+.submit-booking-btn:enabled {
   display: inline-block;
   padding: 1.5rem 4rem;
-  border-radius: 5px;
   box-shadow: inset 0px 2px 3px 0px var(--cyan-color-normal);
   background-color: var(--cyan-color-dark);
   color: var(--white-color);
@@ -127,6 +134,18 @@ h5 {
 }
 .submit-booking-btn:active {
   background-color: var(--cyan-color-dark);
+}
+.submit-booking-btn:disabled {
+  display: inline-block;
+  padding: 1.5rem 4rem;
+  box-shadow: inset 0px 2px 3px 0px var(--gery-color-light);
+  background-color: var(--gery-color-normal);
+  color: var(--white-color);
+  border: 1px solid var(--gery-color-normal);
+  border-radius: 4px;
+}
+.submit-booking-btn:disabled:hover {
+  filter: brightness(1.1);
 }
 @media (max-width: 800px) {
   .booking-section-main {
@@ -153,8 +172,7 @@ h5 {
     min-height: 25rem;
     margin: 0 auto;
   }
-  .booking-section-user-contact-info > .block,
-  .booking-section-user-credit > .block {
+  .booking-section-user-contact-info > .block {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -188,7 +206,6 @@ h5 {
   .no-attraction-ordered {
     width: 90%;
     margin: 1rem auto;
-    min-height: 55rem;
   }
 
   .booking-section-title {
@@ -200,11 +217,51 @@ h5 {
   }
   .booking-section-confirm-order {
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     margin-top: 3rem;
   }
   .submit-booking-btn {
     width: 100%;
     margin-top: 2rem;
   }
+  .block.card-number-group,
+  .block.card-expiration-date-group,
+  .block.card-ccv-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 7rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    align-items: flex-start;
+  }
+  .booking-input-style.tpfield {
+    display: block;
+    transform: translateY(0%);
+  }
+}
+.tpfield {
+  display: inline-block;
+  transform: translateY(25%);
+}
+.tappay-field-focus {
+  background-color: var(--white-color);
+  border: 2px solid var(--cyan-color-normal);
+}
+.has-error .tappay-field-focus {
+  background-color: var(--red-color-light);
+  border: 2px solid var(--red-color-normal);
+}
+.has-success .tappay-field-focus {
+  background-color: var(--white-color);
+  border: 2px solid var(--cyan-color-normal);
+}
+.has-error.contact {
+  background-color: var(--red-color-light);
+  border: 2px solid var(--red-color-normal);
+  color: var(--red-color-normal);
+}
+.has-success.contact {
+  background-color: var(--cyan-color-light-2);
+  border: 2px solid var(--cyan-color-normal);
 }

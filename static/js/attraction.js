@@ -16,6 +16,18 @@ let date = document.querySelector("input[type='date']");
 let data_price = 2000;
 let data_time_period = "morning";
 
+const disablePreviousDates = function () {
+  const today = new Date();
+  const month =
+    today.getMonth() + 1 < 10
+      ? "0" + (today.getMonth() + 1)
+      : today.getMonth() + 1;
+  console.log(today.getDate());
+  const day = today.getDate() < 10 ? "0" + today.getDate() : today.getDate();
+  const year = today.getFullYear();
+  date.setAttribute("min", `${year}-${month}-${day}`);
+};
+disablePreviousDates();
 //radio button
 timePeriod.forEach(function (e) {
   e.addEventListener("change", function (e) {
@@ -27,6 +39,9 @@ timePeriod.forEach(function (e) {
       data_time_period = "afternoon";
     }
   });
+});
+date.addEventListener("click", () => {
+  date.classList.remove("date-error");
 });
 
 const displayPhotos = function () {
@@ -53,20 +68,9 @@ const displayPhotos = function () {
     carouselImagesContainer.appendChild(div_img_box);
     imgCount++;
   });
+  carouselImagesContainer.classList.remove("animated-bg");
 };
 
-async function getData(src) {
-  try {
-    let response = await fetch(src);
-    data = await response.json();
-    console.log(data);
-    displayContent();
-    displayPhotos();
-    showSlides(slideIndex);
-  } catch (error) {
-    console.log(error);
-  }
-}
 const displayContent = function () {
   data = data.data;
   attractionName.textContent = data.name;
@@ -84,6 +88,19 @@ const displayContent = function () {
     transport.textContent = "[ ☹︎ 無資料 ]";
   }
 };
+
+async function getData(src) {
+  try {
+    let response = await fetch(src);
+    data = await response.json();
+    console.log(data);
+    displayContent();
+    displayPhotos();
+    showSlides(slideIndex);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 //slides images
 function plusSlides(n) {
@@ -121,30 +138,34 @@ document
   .addEventListener("submit", function (e) {
     e.preventDefault();
     if (currentUser !== null) {
-      fetch("/api/booking", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          attractionId: data.id,
-          date: date.value,
-          time: data_time_period,
-          price: data_price,
-        }),
-      })
-        .then(function (response) {
-          return response.json();
+      if (date.value && price.textContent) {
+        fetch("/api/booking", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            attractionId: data.id,
+            date: date.value,
+            time: data_time_period,
+            price: data_price,
+          }),
         })
-        .then(function (text) {
-          window.location = "/booking";
-          if (text.error) {
-            console.log(text.error);
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (text) {
+            window.location = "/booking";
+            if (text.error) {
+              console.log(text.error);
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else {
+        date.classList.add("date-error");
+      }
     } else {
       showModal();
     }

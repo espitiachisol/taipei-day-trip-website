@@ -113,6 +113,10 @@ header {
 .items a:active {
   border-bottom: 2px solid var(--cyan-color-light);
 }
+/* hambergur menu */
+.hamburger-menu {
+  display: none;
+}
 
 /* login section */
 .login-Signin-modal::before {
@@ -209,7 +213,8 @@ p.login-sigin-succeeded {
 }
 .siginErrorMessage,
 .loginErrorMessage {
-  color: var(--cyan-color-main);
+  transition: all 0.2s ease-in-out;
+  color: var(--red-color-normal);
 }
 .login-signin-link {
   cursor: pointer;
@@ -239,8 +244,9 @@ p.login-sigin-succeeded {
   /* box-shadow: inset 0px 1px 6px var(--gery-color-dark-trans-3); */
 }
 .login-signin-input-error {
-  border: 2px solid var(--cyan-color-normal);
-  background-color: var(--cyan-color-light-2);
+  transition: all 0.2s ease-out;
+  background-color: var(--red-color-light);
+  border: 2px solid var(--red-color-normal);
 }
 
 .login-signin-btn {
@@ -287,9 +293,57 @@ footer p {
     min-width: 95%;
   }
 }
+
+@media (max-width: 600px) {
+  header {
+    width: 95%;
+  }
+  .items {
+    opacity: 0.9;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    top: 265%;
+    left: 50%;
+    padding: 1rem 0 2rem 0;
+    transform: translate(-50%, -50%);
+    background-color: var(--gery-color-light-bg);
+    box-shadow: 0px 1px 4px var(--gery-color-dark-trans-3);
+  }
+  .items.flex {
+    display: flex;
+  }
+
+  .items a {
+    margin: 1rem auto;
+  }
+  .hamburger-menu {
+    display: inline-block;
+  }
+  .hamburger-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  .login-Signin-modal {
+    min-width: 95%;
+  }
+}
 .hidden {
   display: none;
 }
 .show {
   display: inline-block;
+}
+.animated-bg {
+  background-image: url("/images/Spinner-1s-200px.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 35%;
+}
+.animated-bg-sm {
+  background-image: url("/images/Spinner-1s-200px.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20%;
 }

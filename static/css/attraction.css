@@ -10,7 +10,7 @@
 
 .booking-section {
   margin: 4rem auto 0rem auto;
-  min-height: 400px;
+  min-height: 40rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -37,6 +37,7 @@
   padding: 2rem;
   background-color: var(--gery-color-light);
 }
+
 .price {
   display: inline-block;
 }
@@ -81,6 +82,10 @@
   outline: none;
   border: 2px solid var(--cyan-color-normal);
   background-color: var(--white-color);
+}
+.date.date-error {
+  background-color: var(--red-color-light);
+  border: 2px solid var(--red-color-normal);
 }
 /* radio button */
 [name="time-period"]:checked,
@@ -140,7 +145,8 @@ img {
 .booking-section-carousel-images {
   position: relative;
   width: 46%;
-  padding: 0 1rem;
+  margin: 0 1rem;
+  background-color: var(--gery-color-white);
 }
 
 /* Next & previous buttons */
@@ -260,14 +266,12 @@ img {
     flex-direction: row;
     flex-wrap: wrap;
   }
-  .date {
-    width: 65%;
-  }
 
   .booking-section-info-order {
     width: 100%;
   }
   .booking-section-carousel-images {
+    min-height: 40rem;
     padding: 0;
     width: 100%;
   }
