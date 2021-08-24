@@ -108,7 +108,7 @@ TPDirect.card.onUpdate(function (update) {
 });
 //display
 const displayOrderInfo = function (bookingData) {
-  console.log(bookingData);
+  // console.log(bookingData);
   booking_user_name.textContent = currentUser.name;
   if (bookingData.data) {
     tripData = bookingData.data;
@@ -156,11 +156,11 @@ document
       user_contact_name.value
     ) {
       const tappayStatus = TPDirect.card.getTappayFieldsStatus();
-      console.log(tappayStatus);
-      console.log(tripData);
+      // console.log(tappayStatus);
+      // console.log(tripData);
       if (tappayStatus.canGetPrime === false) {
-        console.log(tappayStatus);
-        console.log("can not get prime");
+        // console.log(tappayStatus);
+        // console.log("can not get prime");
         return;
       }
       //get prime
@@ -169,7 +169,7 @@ document
           console.log("get prime error " + result.msg);
           return;
         }
-        console.log("get prime 成功，prime: " + result.card.prime);
+        // console.log("get prime 成功，prime: " + result.card.prime);
         fetch("/api/orders", {
           method: "POST",
           headers: {
@@ -202,7 +202,7 @@ document
           })
           .then(function (res) {
             if (res.data.payment.message === "付款失敗") {
-              console.log(res);
+              // console.log(res);
               errorMsg.textContent =
                 "交易失敗，信用卡資訊有錯誤或是其他原因，請再次確認。";
             } else if (res.data.payment.message === "付款成功") {
@@ -227,7 +227,7 @@ const deleteOrders = function () {
       return response.json();
     })
     .then(function (text) {
-      console.log(text);
+      // console.log(text);
       addRemoveHidden(have_attraction_ordered, no_attraction_ordered);
     })
     .catch(function (error) {

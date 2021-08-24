@@ -22,7 +22,7 @@ const disablePreviousDates = function () {
     today.getMonth() + 1 < 10
       ? "0" + (today.getMonth() + 1)
       : today.getMonth() + 1;
-  console.log(today.getDate());
+  // console.log(today.getDate());
   const day = today.getDate() < 10 ? "0" + today.getDate() : today.getDate();
   const year = today.getFullYear();
   date.setAttribute("min", `${year}-${month}-${day}`);
@@ -93,7 +93,7 @@ async function getData(src) {
   try {
     let response = await fetch(src);
     data = await response.json();
-    console.log(data);
+    // console.log(data);
     displayContent();
     displayPhotos();
     showSlides(slideIndex);

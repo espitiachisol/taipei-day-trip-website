@@ -87,7 +87,7 @@ window.addEventListener("scroll", () => {
 const getKeywordAttractions = function () {
   //get /api/attractions keywords
   keyword = document.getElementById("keyword").value;
-  console.log(keyword);
+  // console.log(keyword);
   if (keyword) {
     //remove loaded data from on load
     var list = document.getElementById("pics-section");
