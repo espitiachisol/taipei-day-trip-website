@@ -120,7 +120,7 @@ logOut.addEventListener("click", function () {
           }
         }, 500);
       }
-      console.log(text);
+      // console.log(text);
     })
     .catch(function (error) {
       console.log(error);

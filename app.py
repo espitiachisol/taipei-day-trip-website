@@ -169,7 +169,7 @@ def api_user():
 				cnx.close()
 				return jsonify({"error": True,"message": "email重複"}),400
 			else:
-				print(username,email,password)
+				# print(username,email,password)
 				val = (username, email, password)
 				sql = "INSERT INTO users (name, email,password) VALUES (%s, %s, %s)"
 				cursor.execute(sql, val)
@@ -187,7 +187,7 @@ def api_user():
 			 data={"data":
 			 {"id":currentUserEmail[0],
 			 "name":currentUserEmail[1],"email":currentUserEmail[2]}}
-			 print(data)
+			#  print(data)
 			 cnx.close()
 			 return  jsonify(data),200
 			 
@@ -266,7 +266,7 @@ def api_booking():
 				 images=json.loads(userOrderattraction[9])
 				 data={"data":{"attraction":{"id":userOrderattraction[0],"name":userOrderattraction[1],"address":userOrderattraction[4],"image":images[0]},"date":userOrder[3],"time":userOrder[4],"price":userOrder[5]}}
 				
-				 print(jsonify(data))
+				#  print(jsonify(data))
 				 cnx.close()
 				 return  jsonify(data),200
 			 else:
@@ -311,7 +311,7 @@ def api_orders():
 						"date": eachData[8]},
 						}
 					result.append(data)
-					print(result)
+					# print(result)
 				cnx.close()
 				return jsonify(result),200
 			else:
@@ -365,7 +365,7 @@ def api_orders():
 				}
 				r = requests.post(url,headers=headers,json=dataToTappay)
 				dataGetFromTappay = r.json()
-				print(dataGetFromTappay)
+				# print(dataGetFromTappay)
 				if dataGetFromTappay['status']==0:
 					message="付款成功"
 					status=0
@@ -423,7 +423,7 @@ def api_order(orderNumber):
 						},
 					"status": dataFromPayStatus[2]}
 					}
-				print(data)
+				# print(data)
 				cnx.close()
 				return jsonify(data),200
 
