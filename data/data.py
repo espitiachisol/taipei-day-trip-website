@@ -41,7 +41,7 @@ with open('taipei-attractions.json',mode='r',encoding='utf-8')as file:
         for each_image in image_file:
             each_image=each_image.lower()
             if "png" in each_image or "jpg" in each_image:
-                url= "http://"+ each_image
+                url= "https://"+ each_image
                 image_file_filtered.append(url)
         image_file_filtered=json.dumps(image_file_filtered)
 
@@ -50,6 +50,7 @@ with open('taipei-attractions.json',mode='r',encoding='utf-8')as file:
         sql = "INSERT INTO attractions (name, category,description,address,transport,mrt,latitude,longitude,images) VALUES (%s, %s, %s,%s,%s,%s,%s,%s,%s)"
         cursor.execute(sql, val)
         cnx.commit()
+        
             
 print ("okay") 
 cnx.close()
