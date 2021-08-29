@@ -14,7 +14,7 @@ A guided tour of Taipei attractions.
 - **Expired(MM/YY):** 01 23 
 - **CCV:** 123
 
-#### Features:
+### Features:
 - Taipei attractions.
 
 <img width="600" alt="Taipei attractions page" src="https://user-images.githubusercontent.com/61710519/131245068-3567d5b4-2c57-4045-a5a1-1de03ad3a425.png"></img>
@@ -39,7 +39,7 @@ A guided tour of Taipei attractions.
 | JavaScript   | Infinite scroll attraction cards, carousel images, popup Signup/Login modal window, hamburger menu button. | 
 | RWD   | CSS Flex-Box | 
 | APIs   |  RESTful APIs | 
-| Database  | MySQL, Connection Pool   |   
+| Database  | MySQL, Connection Pool.  |   
 | Back-end |Python Flask  | 
 | AWS   | EC2(Amazon Linux 2)   | 
 | Third-Party API | TapPay SDK service for the payment system. | 
